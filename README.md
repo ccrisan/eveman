@@ -54,49 +54,49 @@ Use the following commands to test the various available API calls.
 
 ### Register User
 
-curl -X POST -H "Content-Type: application/json" \
-     -d '{"username": "user1", "password": "deadbeef", "password2": "deadbeef", "first_name": "User", "last_name": "One", "email": "user1@example.com"}' \
-    http://localhost:8000/api/register/ | jq
+    curl -X POST -H "Content-Type: application/json" \
+         -d '{"username": "user1", "password": "deadbeef", "password2": "deadbeef", "first_name": "User", "last_name": "One", "email": "user1@example.com"}' \
+        http://localhost:8000/api/register/ | jq
 
 ### Login
 
-curl -X POST -H "Content-Type: application/json" \
-     -d '{"username": "user1", "password": "deadbeef"}' \
-    http://localhost:8000/api/token/ | jq
+    curl -X POST -H "Content-Type: application/json" \
+         -d '{"username": "user1", "password": "deadbeef"}' \
+        http://localhost:8000/api/token/ | jq
 
 ### Refresh Token
 
-curl -X POST -H "Content-Type: application/json" \
-     -d '{"refresh":"<refresh_token_from_above>"}' \
-     http://localhost:8000/api/token/refresh/ | jq
+    curl -X POST -H "Content-Type: application/json" \
+         -d '{"refresh":"<refresh_token_from_above>"}' \
+         http://localhost:8000/api/token/refresh/ | jq
 
 ### Create Event
 
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" \
-     -d '{"name": "event1", "description": "description1", "moment": "2008-09-10T11:12:13"}' \
-     http://localhost:8000/api/events/ | jq
+    curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" \
+         -d '{"name": "event1", "description": "description1", "moment": "2008-09-10T11:12:13"}' \
+         http://localhost:8000/api/events/ | jq
 
 ### Edit Event
 
-curl -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" \
-     -d '{"description": "updated description1"}' \
-     http://localhost:8000/api/events/1/
+    curl -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" \
+         -d '{"description": "updated description1"}' \
+         http://localhost:8000/api/events/1/
 
 ### List All Events
 
-curl -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/ | jq
+    curl -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/ | jq
 
 ### List My Events
 
-curl -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/my/ | jq
+    curl -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/my/ | jq
 
 ### Register Attendance
 
-curl -X PUT -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/1/attendance/
+    curl -X PUT -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/1/attendance/
 
 ### Unregister Attendance
 
-curl -X DELETE -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/1/attendance/
+    curl -X DELETE -H "Authorization: Bearer <access_token>" http://localhost:8000/api/events/1/attendance/
 
 
 ## Running Tests
