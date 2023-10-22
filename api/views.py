@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from rest_framework import generics
@@ -5,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 
-from .exceptions import TooManyAttendees
+from .exceptions import PastEvent, TooManyAttendees
 from .models import Event
 from .serializers import RegisterSerializer, CreateEventSerializer, UpdateEventSerializer, ViewEventSerializer
 
@@ -121,6 +123,8 @@ class EventAttendanceView(generics.GenericAPIView):
         event = self.get_object()
         if 0 < event.max_attendees <= event.attendees.count():
             raise TooManyAttendees()
+        if event.moment < datetime.utcnow():
+            raise PastEvent()
 
         event.attendees.add(request.user)
         return Response(status=200)
@@ -133,5 +137,8 @@ class EventAttendanceView(generics.GenericAPIView):
         """
 
         event = self.get_object()
+        if event.moment < datetime.utcnow():
+            raise PastEvent()
+
         event.attendees.remove(request.user)
         return Response(status=200)

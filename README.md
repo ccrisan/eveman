@@ -17,6 +17,8 @@ API schema generation and documentation is built with `drf-spectacular`, includi
 
 Most of the codebase (including models, logic, serializers, etc) is structured in a Django app called `api`.
 
+Datetime objects are kept in UTC.
+
 
 ## Install
 
